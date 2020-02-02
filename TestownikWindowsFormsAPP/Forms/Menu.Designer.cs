@@ -1,6 +1,6 @@
 ﻿namespace TestownikWindowsFormsAPP
 {
-    partial class MenuForm
+    partial class Menu
     {
         /// <summary>
         /// Required designer variable.
@@ -43,7 +43,7 @@
             this.startButton.TabIndex = 0;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.Button1_Click);
+            this.startButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // welcomeLabel
             // 
@@ -57,6 +57,7 @@
             // 
             // exitButton
             // 
+            this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.exitButton.Location = new System.Drawing.Point(100, 350);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(200, 50);

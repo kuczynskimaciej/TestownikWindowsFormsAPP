@@ -10,16 +10,18 @@ using System.Windows.Forms;
 
 namespace TestownikWindowsFormsAPP
 {
-    public partial class MenuForm : Form
+    public partial class Menu : Form
     {
-        public MenuForm()
+        public Menu()
         {
             InitializeComponent();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void StartButton_Click(object sender, EventArgs e)
         {
-
+            Test openTestForm = new Test();
+            openTestForm.Show();
+            this.Hide();
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -29,7 +31,7 @@ namespace TestownikWindowsFormsAPP
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            
+            Application.Exit();
         }
     }
 }

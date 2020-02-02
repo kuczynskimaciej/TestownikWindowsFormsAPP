@@ -1,0 +1,6 @@
+﻿1000
+Ulubiony kolor?
+Niebieski
+Czerwony
+Zielony
+Czarny
