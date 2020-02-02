@@ -21,7 +21,10 @@ namespace TestownikWindowsFormsAPP
         {
             Test openTestForm = new Test();
             openTestForm.Show();
-            this.Hide();
+            this.Hide();       
+            openTestForm.CountOfRepetitionsOfQuestion = countOfRepeatsComboBox.SelectedIndex;
+            openTestForm.WhileFail = whileFailComboBox.SelectedIndex;
+            openTestForm.LoadQuestion();
         }
 
         private void EditButton_Click(object sender, EventArgs e)

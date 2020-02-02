@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TestownikWindowsFormsAPP
 {
 
-    public class QuestionParserer
+    public class QuestionParsererService
     {
         public List<QuestionDto> ReadQuestions(string path)
         {
@@ -17,7 +17,6 @@ namespace TestownikWindowsFormsAPP
             foreach (var questionFile in questionFiles)
             {
                 string[] lines = File.ReadAllLines(questionFile);
-
                 QuestionDto question = new QuestionDto
                 {
                     Question = lines[1]
@@ -40,7 +39,6 @@ namespace TestownikWindowsFormsAPP
                 }
 
                 questions.Add(question);
-
             }
 
             return questions;
