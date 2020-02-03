@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,8 @@ namespace TestownikWindowsFormsAPP
         {
             Test openTestForm = new Test();
             openTestForm.Show();
-            this.Hide();       
-            openTestForm.CountOfRepetitionsOfQuestion = countOfRepeatsComboBox.SelectedIndex;
+            this.Hide();
+            openTestForm.CountOfRepetitons = countOfRepeatsComboBox.SelectedIndex;
             openTestForm.WhileFail = whileFailComboBox.SelectedIndex;
             openTestForm.LoadQuestion();
         }

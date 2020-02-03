@@ -12,15 +12,36 @@ namespace TestownikWindowsFormsAPP
 {
     public partial class Test : Form
     {
+        readonly Random rnd = new Random();
         public List<AnswerDto> Answers { get; set; }
-        public int CountOfRepetitionsOfQuestion { get; set; }
         public int WhileFail { get; set; }
+        public int CountOfRepetitons { get; set; }
         private readonly QuestionParsererService questionParser = new QuestionParsererService();
         public Test()
         {
             InitializeComponent();
         }
-
+        public void LoadQuestion()
+        {
+            var questions = questionParser.ReadQuestions("Pytania");
+            foreach (QuestionDto question in questions)
+            {
+                question.CountOfRepetitionsOfQuestion = CountOfRepetitons;
+            }
+            var countOfQuestions = questions.Count();
+            var indexOfRndQuestion = rnd.Next(countOfQuestions);
+            var randomQuestion = questions[indexOfRndQuestion];
+            randomQuestion.Answers.Shuffle();
+            questionTextBox.Text = randomQuestion.Question;
+            Answers = randomQuestion.Answers.ToList();
+            Answers.Shuffle();
+            A_Button.Text = Answers[0].Answer;
+            B_Button.Text = Answers[1].Answer;
+            C_Button.Text = Answers[2].Answer;
+            D_Button.Text = Answers[3].Answer;
+            countOfRepetitionsOfQuestionLabel.Text = randomQuestion.CountOfRepetitionsOfQuestion.ToString();
+            UnmarkAnswers();
+        }
         private void BackButton_Click(object sender, EventArgs e)
         {
             Menu openMenuForm = new Menu();
@@ -31,28 +52,20 @@ namespace TestownikWindowsFormsAPP
         private void TossButton_Click(object sender, EventArgs e)
         {
             LoadQuestion();
-            if (CountOfRepetitionsOfQuestion < 0)
-            {
-                MessageBox.Show("Koniec");
-            }
+            //if (CountOfRepetitionsOfQuestion < 0)
+            //{
+            //    MessageBox.Show("Koniec");
+            //}
         }
 
         private void A_Button_Click(object sender, EventArgs e)
         {
             if (A_Button.BackColor == SystemColors.Control)
             {
-                if (Answers[0].IsCorrect == true)
-                {
-                    CountOfRepetitionsOfQuestion--;
-                }
                 A_Button.BackColor = GetColor(false);
             }
             else if (A_Button.BackColor == Color.LawnGreen)
             {
-                if (Answers[0].IsCorrect == false)
-                {
-                    CountOfRepetitionsOfQuestion += WhileFail;
-                }
                 A_Button.BackColor = GetColor(true);
             }
         }
@@ -61,18 +74,10 @@ namespace TestownikWindowsFormsAPP
         {
             if (B_Button.BackColor == SystemColors.Control)
             {
-                if (Answers[1].IsCorrect == true)
-                {
-                    CountOfRepetitionsOfQuestion--;
-                }
                 B_Button.BackColor = GetColor(false);
             }
             else if (B_Button.BackColor == Color.LawnGreen)
             {
-                if (Answers[1].IsCorrect == false)
-                {
-                    CountOfRepetitionsOfQuestion += WhileFail;
-                }
                 B_Button.BackColor = GetColor(true);
             }
         }
@@ -81,18 +86,10 @@ namespace TestownikWindowsFormsAPP
         {
             if (C_Button.BackColor == SystemColors.Control)
             {
-                if (Answers[2].IsCorrect == true)
-                {
-                    CountOfRepetitionsOfQuestion--;
-                }
                 C_Button.BackColor = GetColor(false);
             }
             else if (C_Button.BackColor == Color.LawnGreen)
             {
-                if (Answers[2].IsCorrect == false)
-                {
-                    CountOfRepetitionsOfQuestion += WhileFail;
-                }
                 C_Button.BackColor = GetColor(true);
             }
         }
@@ -101,42 +98,15 @@ namespace TestownikWindowsFormsAPP
         {
             if (D_Button.BackColor == SystemColors.Control)
             {
-                if (Answers[3].IsCorrect == true)
-                {
-                    CountOfRepetitionsOfQuestion--;
-                }
                 D_Button.BackColor = GetColor(false);
             }
             else if (D_Button.BackColor == Color.LawnGreen)
             {
-                if (Answers[3].IsCorrect == false)
-                {
-                    CountOfRepetitionsOfQuestion += WhileFail;
-                }
                 D_Button.BackColor = GetColor(true);
             }
         }
 
-        public void LoadQuestion()
-        {
-            Random rnd = new Random();
 
-            var questions = questionParser.ReadQuestions("Pytania");
-            var countOfQuestions = questions.Count();
-            var indexOfRndQuestion = rnd.Next(countOfQuestions);
-            var randomQuestion = questions[indexOfRndQuestion];
-            randomQuestion.Answers.Shuffle();
-            randomQuestion.CountOfRepetitionsOfQuestion = CountOfRepetitionsOfQuestion;
-            countOfRepetitionsOfQuestionLabel.Text = CountOfRepetitionsOfQuestion.ToString();
-            questionTextBox.Text = randomQuestion.Question;
-            Answers = randomQuestion.Answers.ToList();
-            Answers.Shuffle();
-            A_Button.Text = Answers[0].Answer;
-            B_Button.Text = Answers[1].Answer;
-            C_Button.Text = Answers[2].Answer;
-            D_Button.Text = Answers[3].Answer;
-            UnmarkAnswers();
-        }
 
         public Color GetColor(bool isColored)
         {

@@ -19,8 +19,10 @@ namespace TestownikWindowsFormsAPP
                 string[] lines = File.ReadAllLines(questionFile);
                 QuestionDto question = new QuestionDto
                 {
+                    
                     Question = lines[1]
                 };
+                
 
                 var answersPointers = lines[0].ToCharArray();
                 var answerLines = lines.Skip(2).ToArray();
