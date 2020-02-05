@@ -10,6 +10,7 @@ namespace TestownikWindowsFormsAPP
 
     public class QuestionParsererService
     {
+        public List<QuestionDto> Questions { get; set; }
         public List<QuestionDto> ReadQuestions(string path)
         {
             string[] questionFiles = Directory.GetFiles(path);
@@ -19,10 +20,8 @@ namespace TestownikWindowsFormsAPP
                 string[] lines = File.ReadAllLines(questionFile);
                 QuestionDto question = new QuestionDto
                 {
-                    
                     Question = lines[1]
                 };
-                
 
                 var answersPointers = lines[0].ToCharArray();
                 var answerLines = lines.Skip(2).ToArray();

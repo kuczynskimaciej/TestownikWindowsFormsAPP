@@ -37,6 +37,8 @@
             this.D_Button = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.countOfRepetitionsOfQuestionLabel = new System.Windows.Forms.Label();
+            this.checkButton = new System.Windows.Forms.Button();
+            this.ResultLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // backButton
@@ -51,7 +53,8 @@
             // 
             // questionTextBox
             // 
-            this.questionTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.questionTextBox.Cursor = System.Windows.Forms.Cursors.Default;
+            this.questionTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.questionTextBox.Location = new System.Drawing.Point(40, 30);
             this.questionTextBox.Multiline = true;
             this.questionTextBox.Name = "questionTextBox";
@@ -68,7 +71,7 @@
             this.nextQuestionButton.TabIndex = 2;
             this.nextQuestionButton.Text = "Następne pytanie";
             this.nextQuestionButton.UseVisualStyleBackColor = true;
-            this.nextQuestionButton.Click += new System.EventHandler(this.TossButton_Click);
+            this.nextQuestionButton.Click += new System.EventHandler(this.NextQuestionButton_Click);
             // 
             // A_Button
             // 
@@ -124,11 +127,32 @@
             this.countOfRepetitionsOfQuestionLabel.TabIndex = 8;
             this.countOfRepetitionsOfQuestionLabel.Text = "0";
             // 
+            // checkButton
+            // 
+            this.checkButton.Location = new System.Drawing.Point(640, 433);
+            this.checkButton.Name = "checkButton";
+            this.checkButton.Size = new System.Drawing.Size(200, 50);
+            this.checkButton.TabIndex = 9;
+            this.checkButton.Text = "Sprawdź";
+            this.checkButton.UseVisualStyleBackColor = true;
+            this.checkButton.Click += new System.EventHandler(this.CheckButton_Click);
+            // 
+            // ResultLabel
+            // 
+            this.ResultLabel.AutoSize = true;
+            this.ResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.ResultLabel.Location = new System.Drawing.Point(513, 433);
+            this.ResultLabel.Name = "ResultLabel";
+            this.ResultLabel.Size = new System.Drawing.Size(0, 25);
+            this.ResultLabel.TabIndex = 10;
+            // 
             // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(880, 508);
+            this.Controls.Add(this.ResultLabel);
+            this.Controls.Add(this.checkButton);
             this.Controls.Add(this.countOfRepetitionsOfQuestionLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.D_Button);
@@ -140,7 +164,7 @@
             this.Controls.Add(this.backButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Test";
-            this.Text = "Test";
+            this.Text = "Pytanie";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -157,5 +181,7 @@
         private System.Windows.Forms.Button D_Button;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label countOfRepetitionsOfQuestionLabel;
+        private System.Windows.Forms.Button checkButton;
+        private System.Windows.Forms.Label ResultLabel;
     }
 }
