@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace TestownikWindowsFormsAPP
 {
     public partial class Menu : Form
@@ -20,10 +21,9 @@ namespace TestownikWindowsFormsAPP
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            Test openTestForm = new Test();
+            Test openTestForm = new Test(int.Parse(countOfRepeatsComboBox.Text));
             openTestForm.Show();
             this.Hide();
-            openTestForm.CountOfRepetitons = countOfRepeatsComboBox.SelectedIndex;
             openTestForm.WhileFail = whileFailComboBox.SelectedIndex;
             openTestForm.LoadQuestion();
         }

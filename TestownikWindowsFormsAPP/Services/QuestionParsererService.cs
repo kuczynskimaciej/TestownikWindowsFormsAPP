@@ -10,11 +10,10 @@ namespace TestownikWindowsFormsAPP
 
     public class QuestionParsererService
     {
-        public List<QuestionDto> Questions { get; set; }
-        public List<QuestionDto> ReadQuestions(string path)
+        public Dictionary<string, QuestionDto> ReadQuestions(string path)
         {
             string[] questionFiles = Directory.GetFiles(path);
-            List<QuestionDto> questions = new List<QuestionDto>();
+            Dictionary<string, QuestionDto> questions = new Dictionary<string, QuestionDto>();
             foreach (var questionFile in questionFiles)
             {
                 string[] lines = File.ReadAllLines(questionFile);
@@ -39,7 +38,7 @@ namespace TestownikWindowsFormsAPP
                     question.Answers.Add(answer);
                 }
 
-                questions.Add(question);
+                questions.Add(questionFile.Substring(questionFile.IndexOf("\\")).Replace("\\", ""), question);
             }
 
             return questions;

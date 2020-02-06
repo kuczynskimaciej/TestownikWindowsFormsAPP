@@ -39,6 +39,8 @@
             this.countOfRepetitionsOfQuestionLabel = new System.Windows.Forms.Label();
             this.checkButton = new System.Windows.Forms.Button();
             this.ResultLabel = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.leftQuestionsLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // backButton
@@ -112,7 +114,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(261, 433);
+            this.label1.Location = new System.Drawing.Point(260, 433);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 13);
             this.label1.TabIndex = 7;
@@ -146,11 +148,31 @@
             this.ResultLabel.Size = new System.Drawing.Size(0, 25);
             this.ResultLabel.TabIndex = 10;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(260, 470);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Pozostało pytań:";
+            // 
+            // leftQuestionsLabel
+            // 
+            this.leftQuestionsLabel.AutoSize = true;
+            this.leftQuestionsLabel.Location = new System.Drawing.Point(354, 470);
+            this.leftQuestionsLabel.Name = "leftQuestionsLabel";
+            this.leftQuestionsLabel.Size = new System.Drawing.Size(13, 13);
+            this.leftQuestionsLabel.TabIndex = 12;
+            this.leftQuestionsLabel.Text = "0";
+            // 
             // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(880, 508);
+            this.Controls.Add(this.leftQuestionsLabel);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.ResultLabel);
             this.Controls.Add(this.checkButton);
             this.Controls.Add(this.countOfRepetitionsOfQuestionLabel);
@@ -183,5 +205,7 @@
         private System.Windows.Forms.Label countOfRepetitionsOfQuestionLabel;
         private System.Windows.Forms.Button checkButton;
         private System.Windows.Forms.Label ResultLabel;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label leftQuestionsLabel;
     }
 }

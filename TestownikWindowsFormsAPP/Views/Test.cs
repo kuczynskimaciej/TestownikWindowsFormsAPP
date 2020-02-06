@@ -1,28 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using TestownikWindowsFormsAPP.Views;
 
 namespace TestownikWindowsFormsAPP
 {
+
     public partial class Test : Form
     {
         readonly Random rnd = new Random();
-        public List<QuestionDto> Questions { get; set; }
-        public List<AnswerDto> Answers { get; set; }
+        private KeyValuePair<string, QuestionDto> _question;
+        private List<AnswerDto> Answers { get; set; }
+        readonly private Dictionary<string, QuestionDto> _dicionaryOfQuestions = new Dictionary<string, QuestionDto>();
         readonly List<bool> Results = new List<bool>();
         public int WhileFail { get; set; }
-        public int CountOfRepetitons { get; set; }
-        private readonly QuestionParsererService questionParser = new QuestionParsererService();
-        public Test()
+        private readonly QuestionParsererService _questionParser = new QuestionParsererService();
+        public Test(int count)
         {
             InitializeComponent();
+            _dicionaryOfQuestions = _questionParser.ReadQuestions("Pytania");
+            foreach (var question in _dicionaryOfQuestions)
+            {
+                question.Value.CountOfRepetitionsOfQuestion = count;
+            }
+            leftQuestionsLabel.Text = _dicionaryOfQuestions.Count().ToString();
         }
 
         private void BackButton_Click(object sender, EventArgs e)
@@ -34,13 +37,14 @@ namespace TestownikWindowsFormsAPP
 
         private void NextQuestionButton_Click(object sender, EventArgs e)
         {
+            nextQuestionButton.Visible = false;
             LoadQuestion();
+            UnmarkAnswers();
             checkButton.Visible = true;
             ResultLabel.Text = "";
             Results.Clear();
             AnswerButtonsActivator(true);
         }
-
 
         private void CheckButton_Click(object sender, EventArgs e)
         {
@@ -101,26 +105,26 @@ namespace TestownikWindowsFormsAPP
 
         public void LoadQuestion() //Metoda do wczytywania pytan i opdowiedzi oraz ich wyświetlania w sposób losowy
         {
-            nextQuestionButton.Visible = false;
-            Questions = questionParser.ReadQuestions("Pytania");
-            foreach (var question in Questions)
+            if (_dicionaryOfQuestions.Count() > 0)
             {
-                question.CountOfRepetitionsOfQuestion = CountOfRepetitons;
+                var countOfQuestions = _dicionaryOfQuestions.Count;
+                var indexOfRndQuestion = rnd.Next(countOfQuestions);
+                _question = _dicionaryOfQuestions.ElementAt(indexOfRndQuestion);
+                _question.Value.Answers.Shuffle();
+                questionTextBox.Text = _question.Value.Question;
+                Answers = _question.Value.Answers.ToList();
+                Answers.Shuffle();
+                Button[] buttons = { A_Button, B_Button, C_Button, D_Button };
+                for (int x = 0; x < Answers.Count(); x++)
+                {
+                    buttons[x].Text = Answers[x].Answer;
+                }
+                countOfRepetitionsOfQuestionLabel.Text = _question.Value.CountOfRepetitionsOfQuestion.ToString();
             }
-
-            var countOfQuestions = Questions.Count();
-            var indexOfRndQuestion = rnd.Next(countOfQuestions);
-            var randomQuestion = Questions[indexOfRndQuestion];
-            randomQuestion.Answers.Shuffle();
-            questionTextBox.Text = randomQuestion.Question;
-            Answers = randomQuestion.Answers.ToList();
-            Answers.Shuffle();
-            A_Button.Text = Answers[0].Answer;
-            B_Button.Text = Answers[1].Answer;
-            C_Button.Text = Answers[2].Answer;
-            D_Button.Text = Answers[3].Answer;
-            countOfRepetitionsOfQuestionLabel.Text = randomQuestion.CountOfRepetitionsOfQuestion.ToString();
-            UnmarkAnswers();
+            else
+            {
+                CheckFinish();
+            }
         }
 
         public void CheckAnswers(int numberOfAnswers) // Metoda do wpisywania do listy "Results" poprawność odpowiedzi
@@ -148,17 +152,34 @@ namespace TestownikWindowsFormsAPP
 
         public void CountRepetitions() //Metoda do sprawdzania odpowiedzi
         {
-            if (Results.All(x => x == true))
+            if (Results.All(x => x)) //bool zawsze przyjmuje wartość true
             {
-                ResultLabel.Text = "GOOD";
+                ResultLabel.Text = "Dobrze!";
+                _dicionaryOfQuestions[_question.Key].CountOfRepetitionsOfQuestion--;
+                if (_dicionaryOfQuestions[_question.Key].CountOfRepetitionsOfQuestion < 0)
+                {
+                    _dicionaryOfQuestions.Remove(_question.Key);
+                }
+                leftQuestionsLabel.Text = _dicionaryOfQuestions.Count().ToString();
             }
             else
             {
-                ResultLabel.Text = "BAAD";
+                ResultLabel.Text = "Źle!";
+                _dicionaryOfQuestions[_question.Key].CountOfRepetitionsOfQuestion += WhileFail;
             }
         }
 
-        public void AnswerButtonsActivator(bool check) // Metoda to sprawdzenia i pokazania lub ukrycie przycisku "Sprawdź"
+        public void CheckFinish() //Metoda wyświetlająca ekran końcowy
+        {
+            if (_dicionaryOfQuestions.Count() == 0)
+            {
+                this.Hide();
+                Finish openFinishForm = new Finish();
+                openFinishForm.Show();
+            }
+        }
+
+        public void AnswerButtonsActivator(bool check) // Metoda do sprawdzenia i pokazania lub ukrycie przycisku "Sprawdź"
         {
             Button[] buttons = { A_Button, B_Button, C_Button, D_Button };
 
@@ -170,6 +191,7 @@ namespace TestownikWindowsFormsAPP
                 }
             }
         }
+
         public Color GetColor(bool isColored) //Metoda do ustawiania koloru przycisku
         {
             if (isColored)
@@ -181,6 +203,7 @@ namespace TestownikWindowsFormsAPP
                 return Color.CornflowerBlue;
             }
         }
+
         private void UnmarkAnswers() // Metoda do zerowania kolorów przycisków
         {
             A_Button.BackColor = GetColor(true);
