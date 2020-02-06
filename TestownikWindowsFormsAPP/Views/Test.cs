@@ -138,6 +138,11 @@ namespace TestownikWindowsFormsAPP
                     buttons[x].BackColor = Color.LightGreen;
                 }
                 else
+                if (Answers[x].IsCorrect == true && buttons[x].BackColor == GetColor(true))
+                {
+                    Results.Add(false);
+                }
+                else
                 if (Answers[x].IsCorrect == false && buttons[x].BackColor == Color.CornflowerBlue)
                 {
                     Results.Add(false);
