@@ -17,22 +17,29 @@ namespace TestownikWindowsFormsAPP
         readonly List<bool> Results = new List<bool>();
         public int WhileFail { get; set; }
         private readonly QuestionParsererService _questionParser = new QuestionParsererService();
+        private short hours, mins, sec;
         public Test(int count)
         {
             InitializeComponent();
+
             _dicionaryOfQuestions = _questionParser.ReadQuestions("Pytania");
             foreach (var question in _dicionaryOfQuestions)
             {
                 question.Value.CountOfRepetitionsOfQuestion = count;
             }
             leftQuestionsLabel.Text = _dicionaryOfQuestions.Count().ToString();
+            ShowTime();
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            Menu openMenuForm = new Menu();
-            openMenuForm.Show();
-            this.Close();
+            DialogResult dialogResult = MessageBox.Show("Jesteś pewny?", "Koniec", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Menu openMenuForm = new Menu();
+                openMenuForm.Show();
+                this.Close();
+            }
         }
 
         private void NextQuestionButton_Click(object sender, EventArgs e)
@@ -103,18 +110,69 @@ namespace TestownikWindowsFormsAPP
             }
         }
 
+        private void E_Button_Click(object sender, EventArgs e)
+        {
+            if (E_Button.BackColor == SystemColors.Control)
+            {
+                E_Button.BackColor = GetColor(false);
+            }
+            else if (E_Button.BackColor == Color.CornflowerBlue)
+            {
+                E_Button.BackColor = GetColor(true);
+            }
+        }
+
+        private void F_Button_Click(object sender, EventArgs e)
+        {
+            if (F_Button.BackColor == SystemColors.Control)
+            {
+                F_Button.BackColor = GetColor(false);
+            }
+            else if (F_Button.BackColor == Color.CornflowerBlue)
+            {
+                F_Button.BackColor = GetColor(true);
+            }
+        }
+
+        private void G_Button_Click(object sender, EventArgs e)
+        {
+            if (G_Button.BackColor == SystemColors.Control)
+            {
+                G_Button.BackColor = GetColor(false);
+            }
+            else if (G_Button.BackColor == Color.CornflowerBlue)
+            {
+                G_Button.BackColor = GetColor(true);
+            }
+        }
+
+        private void H_Button_Click(object sender, EventArgs e)
+        {
+            if (H_Button.BackColor == SystemColors.Control)
+            {
+                H_Button.BackColor = GetColor(false);
+            }
+            else if (H_Button.BackColor == Color.CornflowerBlue)
+            {
+                H_Button.BackColor = GetColor(true);
+            }
+        }
+
         public void LoadQuestion() //Metoda do wczytywania pytan i opdowiedzi oraz ich wyświetlania w sposób losowy
         {
+
             if (_dicionaryOfQuestions.Count() > 0)
             {
                 var countOfQuestions = _dicionaryOfQuestions.Count;
                 var indexOfRndQuestion = rnd.Next(countOfQuestions);
                 _question = _dicionaryOfQuestions.ElementAt(indexOfRndQuestion);
                 _question.Value.Answers.Shuffle();
+                FileNameLabel.Text = _question.Key;
                 questionTextBox.Text = _question.Value.Question;
                 Answers = _question.Value.Answers.ToList();
+                ShowButtons();
                 Answers.Shuffle();
-                Button[] buttons = { A_Button, B_Button, C_Button, D_Button };
+                Button[] buttons = { A_Button, B_Button, C_Button, D_Button, E_Button, F_Button, G_Button, H_Button };
                 for (int x = 0; x < Answers.Count(); x++)
                 {
                     buttons[x].Text = Answers[x].Answer;
@@ -127,9 +185,9 @@ namespace TestownikWindowsFormsAPP
             }
         }
 
-        public void CheckAnswers(int numberOfAnswers) // Metoda do wpisywania do listy "Results" poprawność odpowiedzi
+        private void CheckAnswers(int numberOfAnswers) //Metoda do wpisywania do listy "Results" poprawność odpowiedzi
         {
-            Button[] buttons = { A_Button, B_Button, C_Button, D_Button };
+            Button[] buttons = { A_Button, B_Button, C_Button, D_Button, E_Button, F_Button, G_Button, H_Button };
             for (int x = 0; x < numberOfAnswers; x++)
             {
                 if (Answers[x].IsCorrect == true && buttons[x].BackColor == Color.CornflowerBlue)
@@ -148,14 +206,21 @@ namespace TestownikWindowsFormsAPP
                     Results.Add(false);
                 }
                 else
-                if (A_Button.BackColor == GetColor(true) && B_Button.BackColor == GetColor(true) && C_Button.BackColor == GetColor(true) && D_Button.BackColor == GetColor(true))
+                if (A_Button.BackColor == GetColor(true) &&
+                    B_Button.BackColor == GetColor(true) &&
+                    C_Button.BackColor == GetColor(true) &&
+                    D_Button.BackColor == GetColor(true) &&
+                    E_Button.BackColor == GetColor(true) &&
+                    F_Button.BackColor == GetColor(true) &&
+                    G_Button.BackColor == GetColor(true) &&
+                    H_Button.BackColor == GetColor(true))
                 {
                     Results.Add(false);
                 }
             }
         }
 
-        public void CountRepetitions() //Metoda do sprawdzania odpowiedzi
+        private void CountRepetitions() //Metoda do sprawdzania odpowiedzi
         {
             if (Results.All(x => x)) //bool zawsze przyjmuje wartość true
             {
@@ -174,7 +239,7 @@ namespace TestownikWindowsFormsAPP
             }
         }
 
-        public void CheckFinish() //Metoda wyświetlająca ekran końcowy
+        private void CheckFinish() //Metoda wyświetlająca ekran końcowy
         {
             if (_dicionaryOfQuestions.Count() == 0)
             {
@@ -184,9 +249,9 @@ namespace TestownikWindowsFormsAPP
             }
         }
 
-        public void AnswerButtonsActivator(bool check) // Metoda do sprawdzenia i pokazania lub ukrycie przycisku "Sprawdź"
+        private void AnswerButtonsActivator(bool check) //Metoda do sprawdzenia i pokazania lub ukrycie przycisku "Sprawdź"
         {
-            Button[] buttons = { A_Button, B_Button, C_Button, D_Button };
+            Button[] buttons = { A_Button, B_Button, C_Button, D_Button, E_Button, F_Button, G_Button, H_Button };
 
             if (checkButton.Visible == check)
             {
@@ -197,7 +262,7 @@ namespace TestownikWindowsFormsAPP
             }
         }
 
-        public Color GetColor(bool isColored) //Metoda do ustawiania koloru przycisku
+        private Color GetColor(bool isColored) //Metoda do ustawiania koloru przycisku
         {
             if (isColored)
             {
@@ -209,12 +274,54 @@ namespace TestownikWindowsFormsAPP
             }
         }
 
-        private void UnmarkAnswers() // Metoda do zerowania kolorów przycisków
+        private void UnmarkAnswers() //Metoda do zerowania kolorów przycisków
         {
             A_Button.BackColor = GetColor(true);
             B_Button.BackColor = GetColor(true);
             C_Button.BackColor = GetColor(true);
             D_Button.BackColor = GetColor(true);
+            E_Button.BackColor = GetColor(true);
+            F_Button.BackColor = GetColor(true);
+            G_Button.BackColor = GetColor(true);
+            H_Button.BackColor = GetColor(true);
         }
+
+        private void ShowButtons()
+        {
+            Button[] buttons = { A_Button, B_Button, C_Button, D_Button, E_Button, F_Button, G_Button, H_Button };
+            for (int x = 0; x < buttons.Length; x++)
+            {
+                buttons[x].Visible = false;
+            }
+
+            for (int x = 0; x < Answers.Count; x++)
+            {
+                buttons[x].Visible = true;
+            }
+        } //Metoda wyświetlająca odpowiednią ilość Buttonów
+
+        private void ShowTime()
+        {
+            if (sec < 59)
+            {
+                sec++;
+            }
+            else
+            {
+                sec = 0;
+                if (mins < 59)
+                {
+                    mins++;
+                }
+                else
+                {
+                    hours++;
+                    mins = 0;
+                }
+            }
+
+            TimeLabel.Text = string.Format("{0:00}:{1:00}:{2:00}", hours, mins, sec);
+        }
+
     }
 }

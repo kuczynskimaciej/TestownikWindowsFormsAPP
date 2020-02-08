@@ -41,11 +41,17 @@
             this.ResultLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.leftQuestionsLabel = new System.Windows.Forms.Label();
+            this.E_Button = new System.Windows.Forms.Button();
+            this.F_Button = new System.Windows.Forms.Button();
+            this.G_Button = new System.Windows.Forms.Button();
+            this.H_Button = new System.Windows.Forms.Button();
+            this.FileNameLabel = new System.Windows.Forms.Label();
+            this.TimeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // backButton
             // 
-            this.backButton.Location = new System.Drawing.Point(40, 433);
+            this.backButton.Location = new System.Drawing.Point(40, 651);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(200, 50);
             this.backButton.TabIndex = 0;
@@ -67,7 +73,7 @@
             // 
             // nextQuestionButton
             // 
-            this.nextQuestionButton.Location = new System.Drawing.Point(640, 433);
+            this.nextQuestionButton.Location = new System.Drawing.Point(640, 651);
             this.nextQuestionButton.Name = "nextQuestionButton";
             this.nextQuestionButton.Size = new System.Drawing.Size(200, 50);
             this.nextQuestionButton.TabIndex = 2;
@@ -95,7 +101,7 @@
             // 
             // C_Button
             // 
-            this.C_Button.Location = new System.Drawing.Point(40, 272);
+            this.C_Button.Location = new System.Drawing.Point(40, 257);
             this.C_Button.Name = "C_Button";
             this.C_Button.Size = new System.Drawing.Size(392, 108);
             this.C_Button.TabIndex = 5;
@@ -104,7 +110,7 @@
             // 
             // D_Button
             // 
-            this.D_Button.Location = new System.Drawing.Point(448, 272);
+            this.D_Button.Location = new System.Drawing.Point(448, 257);
             this.D_Button.Name = "D_Button";
             this.D_Button.Size = new System.Drawing.Size(392, 108);
             this.D_Button.TabIndex = 6;
@@ -114,7 +120,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(260, 433);
+            this.label1.Location = new System.Drawing.Point(260, 651);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 13);
             this.label1.TabIndex = 7;
@@ -123,7 +129,7 @@
             // countOfRepetitionsOfQuestionLabel
             // 
             this.countOfRepetitionsOfQuestionLabel.AutoSize = true;
-            this.countOfRepetitionsOfQuestionLabel.Location = new System.Drawing.Point(397, 433);
+            this.countOfRepetitionsOfQuestionLabel.Location = new System.Drawing.Point(397, 651);
             this.countOfRepetitionsOfQuestionLabel.Name = "countOfRepetitionsOfQuestionLabel";
             this.countOfRepetitionsOfQuestionLabel.Size = new System.Drawing.Size(13, 13);
             this.countOfRepetitionsOfQuestionLabel.TabIndex = 8;
@@ -131,7 +137,7 @@
             // 
             // checkButton
             // 
-            this.checkButton.Location = new System.Drawing.Point(640, 433);
+            this.checkButton.Location = new System.Drawing.Point(640, 651);
             this.checkButton.Name = "checkButton";
             this.checkButton.Size = new System.Drawing.Size(200, 50);
             this.checkButton.TabIndex = 9;
@@ -143,7 +149,7 @@
             // 
             this.ResultLabel.AutoSize = true;
             this.ResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.ResultLabel.Location = new System.Drawing.Point(513, 433);
+            this.ResultLabel.Location = new System.Drawing.Point(513, 651);
             this.ResultLabel.Name = "ResultLabel";
             this.ResultLabel.Size = new System.Drawing.Size(0, 25);
             this.ResultLabel.TabIndex = 10;
@@ -151,7 +157,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(260, 470);
+            this.label2.Location = new System.Drawing.Point(260, 688);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 13);
             this.label2.TabIndex = 11;
@@ -160,17 +166,78 @@
             // leftQuestionsLabel
             // 
             this.leftQuestionsLabel.AutoSize = true;
-            this.leftQuestionsLabel.Location = new System.Drawing.Point(354, 470);
+            this.leftQuestionsLabel.Location = new System.Drawing.Point(354, 688);
             this.leftQuestionsLabel.Name = "leftQuestionsLabel";
             this.leftQuestionsLabel.Size = new System.Drawing.Size(13, 13);
             this.leftQuestionsLabel.TabIndex = 12;
             this.leftQuestionsLabel.Text = "0";
             // 
+            // E_Button
+            // 
+            this.E_Button.Location = new System.Drawing.Point(40, 371);
+            this.E_Button.Name = "E_Button";
+            this.E_Button.Size = new System.Drawing.Size(392, 108);
+            this.E_Button.TabIndex = 13;
+            this.E_Button.UseVisualStyleBackColor = true;
+            this.E_Button.Click += new System.EventHandler(this.E_Button_Click);
+            // 
+            // F_Button
+            // 
+            this.F_Button.Location = new System.Drawing.Point(448, 371);
+            this.F_Button.Name = "F_Button";
+            this.F_Button.Size = new System.Drawing.Size(392, 108);
+            this.F_Button.TabIndex = 14;
+            this.F_Button.UseVisualStyleBackColor = true;
+            this.F_Button.Click += new System.EventHandler(this.F_Button_Click);
+            // 
+            // G_Button
+            // 
+            this.G_Button.Location = new System.Drawing.Point(40, 485);
+            this.G_Button.Name = "G_Button";
+            this.G_Button.Size = new System.Drawing.Size(392, 108);
+            this.G_Button.TabIndex = 15;
+            this.G_Button.UseVisualStyleBackColor = true;
+            this.G_Button.Click += new System.EventHandler(this.G_Button_Click);
+            // 
+            // H_Button
+            // 
+            this.H_Button.Location = new System.Drawing.Point(448, 485);
+            this.H_Button.Name = "H_Button";
+            this.H_Button.Size = new System.Drawing.Size(392, 108);
+            this.H_Button.TabIndex = 16;
+            this.H_Button.UseVisualStyleBackColor = true;
+            this.H_Button.Click += new System.EventHandler(this.H_Button_Click);
+            // 
+            // FileNameLabel
+            // 
+            this.FileNameLabel.AutoSize = true;
+            this.FileNameLabel.Location = new System.Drawing.Point(37, 9);
+            this.FileNameLabel.Name = "FileNameLabel";
+            this.FileNameLabel.Size = new System.Drawing.Size(23, 13);
+            this.FileNameLabel.TabIndex = 17;
+            this.FileNameLabel.Text = "File";
+            // 
+            // TimeLabel
+            // 
+            this.TimeLabel.AutoSize = true;
+            this.TimeLabel.Location = new System.Drawing.Point(804, 8);
+            this.TimeLabel.Name = "TimeLabel";
+            this.TimeLabel.Size = new System.Drawing.Size(30, 13);
+            this.TimeLabel.TabIndex = 18;
+            this.TimeLabel.Text = "Time";
+            this.TimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 508);
+            this.ClientSize = new System.Drawing.Size(880, 725);
+            this.Controls.Add(this.TimeLabel);
+            this.Controls.Add(this.FileNameLabel);
+            this.Controls.Add(this.H_Button);
+            this.Controls.Add(this.G_Button);
+            this.Controls.Add(this.F_Button);
+            this.Controls.Add(this.E_Button);
             this.Controls.Add(this.leftQuestionsLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ResultLabel);
@@ -207,5 +274,11 @@
         private System.Windows.Forms.Label ResultLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label leftQuestionsLabel;
+        private System.Windows.Forms.Button E_Button;
+        private System.Windows.Forms.Button F_Button;
+        private System.Windows.Forms.Button G_Button;
+        private System.Windows.Forms.Button H_Button;
+        private System.Windows.Forms.Label FileNameLabel;
+        private System.Windows.Forms.Label TimeLabel;
     }
 }

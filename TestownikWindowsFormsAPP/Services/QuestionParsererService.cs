@@ -24,6 +24,11 @@ namespace TestownikWindowsFormsAPP
 
                 var answersPointers = lines[0].ToCharArray();
                 var answerLines = lines.Skip(2).ToArray();
+                if (answersPointers.Length != answerLines.Length)
+                {
+                    continue;
+                }
+
                 question.Answers = new List<AnswerDto>();
                 for (int i = 0; i < answerLines.Length; i++)
                 {
