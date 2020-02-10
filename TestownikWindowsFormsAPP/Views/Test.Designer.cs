@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.backButton = new System.Windows.Forms.Button();
             this.questionTextBox = new System.Windows.Forms.TextBox();
             this.nextQuestionButton = new System.Windows.Forms.Button();
@@ -47,6 +48,8 @@
             this.H_Button = new System.Windows.Forms.Button();
             this.FileNameLabel = new System.Windows.Forms.Label();
             this.TimeLabel = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // backButton
@@ -55,6 +58,7 @@
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(200, 50);
             this.backButton.TabIndex = 0;
+            this.backButton.TabStop = false;
             this.backButton.Text = "Powrót do MENU";
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.BackButton_Click);
@@ -69,6 +73,7 @@
             this.questionTextBox.ReadOnly = true;
             this.questionTextBox.Size = new System.Drawing.Size(800, 90);
             this.questionTextBox.TabIndex = 1;
+            this.questionTextBox.TabStop = false;
             this.questionTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // nextQuestionButton
@@ -77,6 +82,7 @@
             this.nextQuestionButton.Name = "nextQuestionButton";
             this.nextQuestionButton.Size = new System.Drawing.Size(200, 50);
             this.nextQuestionButton.TabIndex = 2;
+            this.nextQuestionButton.TabStop = false;
             this.nextQuestionButton.Text = "Następne pytanie";
             this.nextQuestionButton.UseVisualStyleBackColor = true;
             this.nextQuestionButton.Click += new System.EventHandler(this.NextQuestionButton_Click);
@@ -87,6 +93,7 @@
             this.A_Button.Name = "A_Button";
             this.A_Button.Size = new System.Drawing.Size(392, 108);
             this.A_Button.TabIndex = 3;
+            this.A_Button.TabStop = false;
             this.A_Button.UseVisualStyleBackColor = true;
             this.A_Button.Click += new System.EventHandler(this.A_Button_Click);
             // 
@@ -96,6 +103,7 @@
             this.B_Button.Name = "B_Button";
             this.B_Button.Size = new System.Drawing.Size(392, 108);
             this.B_Button.TabIndex = 4;
+            this.B_Button.TabStop = false;
             this.B_Button.UseVisualStyleBackColor = true;
             this.B_Button.Click += new System.EventHandler(this.B_Button_Click);
             // 
@@ -105,6 +113,7 @@
             this.C_Button.Name = "C_Button";
             this.C_Button.Size = new System.Drawing.Size(392, 108);
             this.C_Button.TabIndex = 5;
+            this.C_Button.TabStop = false;
             this.C_Button.UseVisualStyleBackColor = true;
             this.C_Button.Click += new System.EventHandler(this.C_Button_Click);
             // 
@@ -114,6 +123,7 @@
             this.D_Button.Name = "D_Button";
             this.D_Button.Size = new System.Drawing.Size(392, 108);
             this.D_Button.TabIndex = 6;
+            this.D_Button.TabStop = false;
             this.D_Button.UseVisualStyleBackColor = true;
             this.D_Button.Click += new System.EventHandler(this.D_Button_Click);
             // 
@@ -141,6 +151,7 @@
             this.checkButton.Name = "checkButton";
             this.checkButton.Size = new System.Drawing.Size(200, 50);
             this.checkButton.TabIndex = 9;
+            this.checkButton.TabStop = false;
             this.checkButton.Text = "Sprawdź";
             this.checkButton.UseVisualStyleBackColor = true;
             this.checkButton.Click += new System.EventHandler(this.CheckButton_Click);
@@ -149,7 +160,7 @@
             // 
             this.ResultLabel.AutoSize = true;
             this.ResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.ResultLabel.Location = new System.Drawing.Point(513, 651);
+            this.ResultLabel.Location = new System.Drawing.Point(495, 625);
             this.ResultLabel.Name = "ResultLabel";
             this.ResultLabel.Size = new System.Drawing.Size(0, 25);
             this.ResultLabel.TabIndex = 10;
@@ -178,6 +189,7 @@
             this.E_Button.Name = "E_Button";
             this.E_Button.Size = new System.Drawing.Size(392, 108);
             this.E_Button.TabIndex = 13;
+            this.E_Button.TabStop = false;
             this.E_Button.UseVisualStyleBackColor = true;
             this.E_Button.Click += new System.EventHandler(this.E_Button_Click);
             // 
@@ -187,6 +199,7 @@
             this.F_Button.Name = "F_Button";
             this.F_Button.Size = new System.Drawing.Size(392, 108);
             this.F_Button.TabIndex = 14;
+            this.F_Button.TabStop = false;
             this.F_Button.UseVisualStyleBackColor = true;
             this.F_Button.Click += new System.EventHandler(this.F_Button_Click);
             // 
@@ -196,6 +209,7 @@
             this.G_Button.Name = "G_Button";
             this.G_Button.Size = new System.Drawing.Size(392, 108);
             this.G_Button.TabIndex = 15;
+            this.G_Button.TabStop = false;
             this.G_Button.UseVisualStyleBackColor = true;
             this.G_Button.Click += new System.EventHandler(this.G_Button_Click);
             // 
@@ -205,6 +219,7 @@
             this.H_Button.Name = "H_Button";
             this.H_Button.Size = new System.Drawing.Size(392, 108);
             this.H_Button.TabIndex = 16;
+            this.H_Button.TabStop = false;
             this.H_Button.UseVisualStyleBackColor = true;
             this.H_Button.Click += new System.EventHandler(this.H_Button_Click);
             // 
@@ -220,18 +235,30 @@
             // TimeLabel
             // 
             this.TimeLabel.AutoSize = true;
-            this.TimeLabel.Location = new System.Drawing.Point(804, 8);
+            this.TimeLabel.Location = new System.Drawing.Point(792, 9);
             this.TimeLabel.Name = "TimeLabel";
-            this.TimeLabel.Size = new System.Drawing.Size(30, 13);
+            this.TimeLabel.Size = new System.Drawing.Size(0, 13);
             this.TimeLabel.TabIndex = 18;
-            this.TimeLabel.Text = "Time";
             this.TimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.TimerTick);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(429, 679);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(153, 35);
+            this.progressBar.TabIndex = 19;
             // 
             // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(880, 725);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.TimeLabel);
             this.Controls.Add(this.FileNameLabel);
             this.Controls.Add(this.H_Button);
@@ -254,6 +281,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Test";
             this.Text = "Pytanie";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Test_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,5 +308,7 @@
         private System.Windows.Forms.Button H_Button;
         private System.Windows.Forms.Label FileNameLabel;
         private System.Windows.Forms.Label TimeLabel;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }

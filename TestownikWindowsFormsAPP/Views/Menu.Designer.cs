@@ -77,6 +77,7 @@
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(220, 50);
             this.editButton.TabIndex = 3;
+            this.editButton.TabStop = false;
             this.editButton.Text = "Edytuj";
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.EditButton_Click);
@@ -93,6 +94,7 @@
             this.countOfRepeatsComboBox.Name = "countOfRepeatsComboBox";
             this.countOfRepeatsComboBox.Size = new System.Drawing.Size(131, 21);
             this.countOfRepeatsComboBox.TabIndex = 4;
+            this.countOfRepeatsComboBox.TabStop = false;
             this.countOfRepeatsComboBox.Text = "2";
             // 
             // whileFailComboBox
@@ -107,6 +109,7 @@
             this.whileFailComboBox.Name = "whileFailComboBox";
             this.whileFailComboBox.Size = new System.Drawing.Size(131, 21);
             this.whileFailComboBox.TabIndex = 5;
+            this.whileFailComboBox.TabStop = false;
             this.whileFailComboBox.Text = "2";
             // 
             // label1

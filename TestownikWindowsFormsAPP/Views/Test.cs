@@ -18,17 +18,73 @@ namespace TestownikWindowsFormsAPP
         public int WhileFail { get; set; }
         private readonly QuestionParsererService _questionParser = new QuestionParsererService();
         private short hours, mins, sec;
-        public Test(int count)
+
+        public Test(int count) //Konstruktor
         {
             InitializeComponent();
-
             _dicionaryOfQuestions = _questionParser.ReadQuestions("Pytania");
             foreach (var question in _dicionaryOfQuestions)
             {
                 question.Value.CountOfRepetitionsOfQuestion = count;
             }
             leftQuestionsLabel.Text = _dicionaryOfQuestions.Count().ToString();
-            ShowTime();
+            timer1.Start();
+            TimeLabel.Text = string.Format("{0:00}:{1:00}:{2:00}", hours, mins, sec);
+            progressBar.Value = 0;
+            progressBar.Minimum = 0;
+            progressBar.Maximum = _dicionaryOfQuestions.Count();
+        }
+        private void Test_Load(object sender, EventArgs e)
+        {
+            this.KeyPreview = true;
+        }
+
+        private void Test_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                backButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.NumPad0)
+            {
+                checkButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                nextQuestionButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
+            {
+                A_Button.PerformClick();
+            }
+            if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
+            {
+                B_Button.PerformClick();
+            }
+            if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
+            {
+                C_Button.PerformClick();
+            }
+            if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
+            {
+                D_Button.PerformClick();
+            }
+            if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
+            {
+                E_Button.PerformClick();
+            }
+            if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
+            {
+                F_Button.PerformClick();
+            }
+            if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
+            {
+                G_Button.PerformClick();
+            }
+            if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
+            {
+                H_Button.PerformClick();
+            }
         }
 
         private void BackButton_Click(object sender, EventArgs e)
@@ -163,6 +219,7 @@ namespace TestownikWindowsFormsAPP
 
             if (_dicionaryOfQuestions.Count() > 0)
             {
+                nextQuestionButton.Visible = false;
                 var countOfQuestions = _dicionaryOfQuestions.Count;
                 var indexOfRndQuestion = rnd.Next(countOfQuestions);
                 _question = _dicionaryOfQuestions.ElementAt(indexOfRndQuestion);
@@ -229,6 +286,7 @@ namespace TestownikWindowsFormsAPP
                 if (_dicionaryOfQuestions[_question.Key].CountOfRepetitionsOfQuestion < 0)
                 {
                     _dicionaryOfQuestions.Remove(_question.Key);
+                    progressBar.Increment(1);
                 }
                 leftQuestionsLabel.Text = _dicionaryOfQuestions.Count().ToString();
             }
@@ -239,12 +297,16 @@ namespace TestownikWindowsFormsAPP
             }
         }
 
-        private void CheckFinish() //Metoda wyświetlająca ekran końcowy
+        private void CheckFinish() //Metoda wyświetlająca ekran końcowy oraz przekazująca czas
         {
             if (_dicionaryOfQuestions.Count() == 0)
             {
-                this.Hide();
+                timer1.Stop();
                 Finish openFinishForm = new Finish();
+                openFinishForm.Sec = sec;
+                openFinishForm.Mins = mins;
+                openFinishForm.Hours = hours;
+                this.Hide();
                 openFinishForm.Show();
             }
         }
@@ -300,7 +362,7 @@ namespace TestownikWindowsFormsAPP
             }
         } //Metoda wyświetlająca odpowiednią ilość Buttonów
 
-        private void ShowTime()
+        private void TimerTick(object sender, EventArgs e)
         {
             if (sec < 59)
             {
@@ -319,9 +381,7 @@ namespace TestownikWindowsFormsAPP
                     mins = 0;
                 }
             }
-
             TimeLabel.Text = string.Format("{0:00}:{1:00}:{2:00}", hours, mins, sec);
-        }
-
+        } //Metoda wyświetlająca czas
     }
 }
