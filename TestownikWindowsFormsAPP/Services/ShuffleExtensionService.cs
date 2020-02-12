@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestownikWindowsFormsAPP
 {
-    public static class ShuffleExtension
+    public static class ShuffleExtensionService
     {
         private static Random random = new Random();
         public static void Shuffle<T>(this IList<T> list)

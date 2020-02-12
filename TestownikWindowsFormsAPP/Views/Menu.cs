@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace TestownikWindowsFormsAPP
 {
@@ -19,9 +21,11 @@ namespace TestownikWindowsFormsAPP
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            Test openTestForm = new Test();
+            Test openTestForm = new Test(int.Parse(countOfRepeatsComboBox.Text));
             openTestForm.Show();
             this.Hide();
+            openTestForm.WhileFail = whileFailComboBox.SelectedIndex;
+            openTestForm.LoadQuestion();
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -33,5 +37,7 @@ namespace TestownikWindowsFormsAPP
         {
             Application.Exit();
         }
+        
+
     }
 }

@@ -8,16 +8,15 @@ using System.Threading.Tasks;
 namespace TestownikWindowsFormsAPP
 {
 
-    public class QuestionParserer
+    public class QuestionParsererService
     {
-        public List<QuestionDto> ReadQuestions(string path)
+        public Dictionary<string, QuestionDto> ReadQuestions(string path)
         {
             string[] questionFiles = Directory.GetFiles(path);
-            List<QuestionDto> questions = new List<QuestionDto>();
+            Dictionary<string, QuestionDto> questions = new Dictionary<string, QuestionDto>();
             foreach (var questionFile in questionFiles)
             {
                 string[] lines = File.ReadAllLines(questionFile);
-
                 QuestionDto question = new QuestionDto
                 {
                     Question = lines[1]
@@ -25,6 +24,11 @@ namespace TestownikWindowsFormsAPP
 
                 var answersPointers = lines[0].ToCharArray();
                 var answerLines = lines.Skip(2).ToArray();
+                if (answersPointers.Length != answerLines.Length)
+                {
+                    continue;
+                }
+
                 question.Answers = new List<AnswerDto>();
                 for (int i = 0; i < answerLines.Length; i++)
                 {
@@ -39,8 +43,7 @@ namespace TestownikWindowsFormsAPP
                     question.Answers.Add(answer);
                 }
 
-                questions.Add(question);
-
+                questions.Add(questionFile.Substring(questionFile.IndexOf("\\")).Replace("\\", ""), question);
             }
 
             return questions;
