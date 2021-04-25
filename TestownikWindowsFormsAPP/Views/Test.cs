@@ -34,10 +34,6 @@ namespace TestownikWindowsFormsAPP
             progressBar.Minimum = 0;
             progressBar.Maximum = _dicionaryOfQuestions.Count();
         }
-        private void Test_Load(object sender, EventArgs e)
-        {
-            this.KeyPreview = true;
-        }
 
         private void Test_KeyDown(object sender, KeyEventArgs e)
         {
